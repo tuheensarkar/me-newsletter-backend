@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/news_letter
+      - DJANGO_DEBUG=False
+      - DJANGO_SECRET_KEY=your-secret-key-here
+      - DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1
+    depends_on:
+      - db
+    volumes:
+      - ./media:/app/media
+      - ./staticfiles:/app/staticfiles
+
+  db:
+    image: postgres:13
+    environment:
+      - POSTGRES_DB=news_letter
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  redis:
+    image: redis:6-alpine
+    ports:
+      - "6379:6379"
+
+volumes:
+  postgres_data:

@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: me-newsletter-backend
+    env: python
+    buildCommand: "pip install -r requirements/production.txt"
+    startCommand: "gunicorn config.wsgi:application"
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: DJANGO_SECRET_KEY
+        sync: false
+      - key: DJANGO_DEBUG
+        value: False
+      - key: DJANGO_ALLOWED_HOSTS
+        value: "*"
