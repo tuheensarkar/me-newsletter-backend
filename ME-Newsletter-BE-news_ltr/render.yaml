@@ -2,9 +2,11 @@ services:
   - type: web
     name: me-newsletter-backend
     env: python
-    buildCommand: "pip install -r requirements/production.txt"
+    buildCommand: "pip install -r requirements.txt && python manage.py collectstatic --noinput"
     startCommand: "gunicorn config.wsgi:application"
     envVars:
+      - key: PYTHON_VERSION
+        value: 3.13.2
       - key: DATABASE_URL
         sync: false
       - key: DJANGO_SECRET_KEY
@@ -12,4 +14,4 @@ services:
       - key: DJANGO_DEBUG
         value: False
       - key: DJANGO_ALLOWED_HOSTS
-        value: "*"
+        sync: false

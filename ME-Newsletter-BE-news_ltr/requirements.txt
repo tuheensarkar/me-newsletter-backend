@@ -10,3 +10,13 @@ psycopg2-binary==2.9.5
 whitenoise==6.2.0
 django-environ==0.8.1
 pillow==9.4.0
+python-slugify==8.0.0
+argon2-cffi==21.3.0
+redis==4.4.2
+hiredis==2.1.1
+django-model-utils==4.2.0
+django-allauth==0.47.0
+django-crispy-forms==1.14.0
+crispy-bootstrap5==0.6
+django-redis==5.2.0
+rest-framework-swagger==0.1.2
